@@ -30,6 +30,7 @@ echo "Push to the mirror repository"
 git push --mirror
 
 echo "Delete local mirror directory"
+cd ..
 rd /S /Q %mirrorDirName%
 
 :END
