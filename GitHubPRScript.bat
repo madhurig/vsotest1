@@ -4,29 +4,41 @@ IF "%1" == "" (
 )
 
 IF "%2" == "" (
- echo "Mirror repository URL is not provided"
+ echo "Mirror repository fork URL is not provided"
  GOTO :END
 )
 
 SET masterRepoUrl="%1"
 SET mirrorDirName="repoMirror"
-SET mirrorRepoUrl="%2"
+SET mirrorRepoForkUrl="%2"
 
 echo "Delete local mirror directory"
 rd /S /Q %mirrorDirName%
 
 echo "Clone mirror repository to local mirror directory"
-git clone %mirrorRepoUrl% %mirrorDirName%
+git clone %mirrorRepoForkUrl% %mirrorDirName%
 
 cd %mirrorDirName%
 
-echo "Set remote push url to the master repository remote"
-git remote set-url origin %masterRepoUrl%
+echo "Add a upstream remote to master repository remote"
+git remote add upstream %masterRepoUrl%
 
-echo "Pull latest"
-git pull
+echo "Fetch latest from master repo"
+git fetch upstream
 
-echo "Push to the master repository"
-git push origin
+echo "Checkout fork's local master"
+git checkout master
+
+echo "merge changes from master to fork's local"
+git merge upstream/master
+
+echo "Resolve merge conflicts if any, run builds, unit tests and any appropriate manual tests"
+
+echo "Push changes to the master repository"
+git push upstream
+
+echo "Delete local mirror directory"
+cd ..
+rd /S /Q %mirrorDirName%
 
 :END
