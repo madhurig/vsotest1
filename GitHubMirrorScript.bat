@@ -29,4 +29,7 @@ git fetch -p origin
 echo "Push to the mirror repository"
 git push --mirror
 
+echo "Delete local mirror directory"
+rd /S /Q %mirrorDirName%
+
 :END
