@@ -29,7 +29,7 @@ git fetch upstream
 echo "Checkout fork's local master"
 git checkout master
 
-echo "merge changes from master to fork's local"
+echo "merge changes from master to fork's local. Should we do a local branch here?"
 git merge upstream/master
 
 echo "Resolve merge conflicts if any, run builds, unit tests and any appropriate manual tests"
@@ -42,3 +42,4 @@ cd ..
 rd /S /Q %mirrorDirName%
 
 :END
+
