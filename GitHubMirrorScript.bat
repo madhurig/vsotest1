@@ -8,9 +8,9 @@ IF "%2" == "" (
  GOTO :END
 )
 
-SET masterRepoUrl=%1
+SET masterRepoUrl="%1"
 SET mirrorDirName="vso-intelliJ-mirror"
-SET mirrorRepoUrl=%2
+SET mirrorRepoUrl="%2"
 
 echo "Delete local mirror directory"
 rd /S /Q %mirrorDirName%
