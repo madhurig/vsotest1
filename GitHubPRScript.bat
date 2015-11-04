@@ -4,7 +4,7 @@ IF "%1" == "" (
 )
 
 IF "%2" == "" (
- echo "Mirror repository URL is not provided"
+ echo "Mirror repository fork URL is not provided"
  GOTO :END
 )
 
@@ -15,7 +15,7 @@ SET mirrorRepoUrl="%2"
 echo "Delete local mirror directory"
 rd /S /Q %mirrorDirName%
 
-echo "Clone mirror repository to local mirror directory"
+echo "Clone mirror repository fork to local mirror directory"
 git clone %mirrorRepoUrl% %mirrorDirName%
 
 cd %mirrorDirName%
