@@ -1,6 +1,6 @@
-rd /S /Q Java.IntelliJ.Mirror
-git clone --mirror https://madhurig-msft.visualstudio.com/DefaultCollection/GitMirrorTest/_git/vsomaster Java.IntelliJ.Mirror
-cd Java.IntelliJ.Mirror
+rd /S /Q vso-intelliJ-mirror
+git clone --mirror %1 vso-intelliJ-mirror
+cd vso-intelliJ-mirror
 git remote set-url --push origin https://github.com/madhurig/vsotest1.git
 git fetch -p origin
 git push --mirror
