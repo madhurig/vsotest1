@@ -46,12 +46,12 @@ rd /S /Q %mirrorDirName%
 exit /b %ERRORLEVEL%
 
 :ERROR
-echo Errors during script execution
+echo Errors during script execution 1>&2
 GOTO END
 
 :USAGE
+echo Invalid arguments passed to script 1>&2
 echo MirrorChanges.bat MasterRepositoryURL MirrorRepositoryURL
 echo MasterRepositoryURL is the remote URL of the Git repository which contains the changes to be mirrored
 echo MirrorRepositoryURL is the remote UL of the Git repository which will mirror the changes in the master repository
-set ERRORLEVEL=1
 GOTO END
