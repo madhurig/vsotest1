@@ -1,4 +1,4 @@
-REM some changes here
+REM some changes here, some more
 
 IF "%1" == "" (
  echo "Master repository URL is not provided"
