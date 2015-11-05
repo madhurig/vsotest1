@@ -9,14 +9,20 @@ IF "%2" == "" (
 )
 
 IF "%3" == "" (
- echo "Mirror repository fork name is not provided"
+ echo "Mirror repository fork URL is not provided"
  GOTO :END
+)
+
+IF "%4" == "" (
+  echo "Branch name in mirror repository fork is not provided"
+  GOTO :END
 )
 
 SET masterRepoUrl="%1"
 SET mirrorDirName="repoMirror"
 SET mirrorRepoUrl="%2"
-SET forkName=%3
+SET mirroRepoForkUrl=%3
+SET forkBranchName=%4
 
 echo "Delete local mirror directory"
 rd /S /Q %mirrorDirName%
@@ -26,8 +32,8 @@ git clone %mirrorRepoUrl% %mirrorDirName%
 
 cd %mirrorDirName%
 
-git fetch %mirrorRepoUrl% %forkName%:gitHubUsers/%forkName%
-git checkout gitHubUsers/%forkName%
+git fetch %mirrorRepoForkUrl% %forkBranchName%:gitHubUsers/%forkBranchName%
+git checkout gitHubUsers/%forkBranchName%
 
 echo "Add a upstream remote to master repository remote"
 git remote add upstream %masterRepoUrl%
