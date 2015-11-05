@@ -20,9 +20,10 @@ SET mirrorDirName=repoMirror
 echo Delete local mirror directory
 rd /S /Q %mirrorDirName%
 
+set ERRORLEVEL=0
 echo Clone master repository to mirror directory
 git clone --mirror %masterRepoUrl% %mirrorDirName%
-IF NOT %ERRORLEVEL%  0 GOTO ERROR
+IF NOT %ERRORLEVEL% EQU 0 GOTO ERROR
 
 cd %mirrorDirName%
 
@@ -31,11 +32,11 @@ git remote set-url --push origin %mirrorRepoURL%
 
 echo Fetch and prune refs from master repository
 git fetch -p origin
-IF NOT %ERRORLEVEL%  0 GOTO ERROR
+IF NOT %ERRORLEVEL% EQU 0 GOTO ERROR
 
 echo Push to the mirror repository
 git push --mirror
-IF NOT %ERRORLEVEL%  0 GOTO ERROR
+IF NOT %ERRORLEVEL% EQU 0 GOTO ERROR
 
 echo Delete local mirror directory
 cd ..
