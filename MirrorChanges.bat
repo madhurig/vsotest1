@@ -15,8 +15,6 @@ IF "%2" == "" (
 SET masterRepoUrl=%1
 SET mirrorRepoURL=%2
 
-IF NOT "%3" == "" cd %3
-
 SET mirrorDirName=repoMirror
 
 echo Delete local mirror directory
