@@ -16,8 +16,7 @@ SET masterRepoUrl=%1
 SET mirrorRepoURL=%2
 
 IF NOT "%3" == "" (
-  SET localDirectory=%3
-  cd %localDirectory%
+  cd %3
 )
 
 SET mirrorDirName=repoMirror
