@@ -4,12 +4,12 @@ REM Inputs needed for the script are : 1. Remote URL for the master repository 2
 
 IF "%1" == "" (
   echo Master repository URL is not provided
-  GOTO :USAGE
+  GOTO USAGE
 )
 
 IF "%2" == "" (
   echo Mirror repository URL is not provided
-  GOTO :USAGE
+  GOTO USAGE
 )
 
 SET masterRepoUrl=%1
@@ -22,9 +22,7 @@ rd /S /Q %mirrorDirName%
 
 echo Clone master repository to mirror directory
 git clone --mirror %masterRepoUrl% %mirrorDirName%
-if %ERRORLEVEL% > 0 (
-  GOTO :ERROR
-)
+IF NOT %ERRORLEVEL%  0 GOTO ERROR
 
 cd %mirrorDirName%
 
@@ -33,15 +31,11 @@ git remote set-url --push origin %mirrorRepoURL%
 
 echo Fetch and prune refs from master repository
 git fetch -p origin
-if %ERRORLEVEL% > 0 (
-  GOTO :ERROR
-)
+IF NOT %ERRORLEVEL%  0 GOTO ERROR
 
 echo Push to the mirror repository
 git push --mirror
-if %ERRORLEVEL% > 0 (
-  GOTO :ERROR
-)
+IF NOT %ERRORLEVEL%  0 GOTO ERROR
 
 echo Delete local mirror directory
 cd ..
@@ -52,11 +46,11 @@ exit /b %ERRORLEVEL%
 
 :ERROR
 echo Errors during script execution
-GOTO :END
+GOTO END
 
 :USAGE
 echo MirrorChanges.bat MasterRepositoryURL MirrorRepositoryURL
 echo MasterRepositoryURL is the remote URL of the Git repository which contains the changes to be mirrored
 echo MirrorRepositoryURL is the remote UL of the Git repository which will mirror the changes in the master repository
 set ERRORLEVEL=1
-GOTO :END
+GOTO END
