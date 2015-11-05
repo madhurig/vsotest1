@@ -15,13 +15,17 @@ IF "%2" == "" (
 SET masterRepoUrl=%1
 SET mirrorRepoURL=%2
 
+IF NOT "%3" == "" (
+  cd %3
+)
+
 SET mirrorDirName=repoMirror
 
 echo Delete local mirror directory
 IF EXIST %mirrorDirName% rd /S /Q %mirrorDirName%
 
 echo Clone master repository to mirror directory
-git clone --mirror %masterRepoUrl% %mirrorDirName%
+git clone --mirror %masterRepoUrl% %mirrorDirName% 
 IF NOT EXIST %mirrorDirName% GOTO ERROR
 IF NOT %ERRORLEVEL% EQU 0 GOTO ERROR
 
