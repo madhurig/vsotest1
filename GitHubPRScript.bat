@@ -1,3 +1,5 @@
+REM some changes here
+
 IF "%1" == "" (
  echo "Master repository URL is not provided"
  GOTO :END
