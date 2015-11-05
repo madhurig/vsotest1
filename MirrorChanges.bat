@@ -17,7 +17,7 @@ SET mirrorRepoURL=%2
 
 IF NOT "%3" == "" (
   SET localDirectory=%3
-  cd localDirectory
+  cd %localDirectory%
 )
 
 SET mirrorDirName=repoMirror
