@@ -109,3 +109,4 @@ Those settings are already configured in the `com.microsoft.alm.plugin.idea.iml`
 
 Gradle build will fail if checkstyle plugin detects a violation.
 
+PR2
